@@ -2,8 +2,6 @@
 
 set -euo pipefail
 
-# TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for spark.
-GH_REPO="https://github.com/apache/spark"
 TOOL_NAME="spark"
 TOOL_TEST="spark-shell --version"
 
@@ -11,13 +9,6 @@ fail() {
 	echo -e "mise-$TOOL_NAME: $*"
 	exit 1
 }
-
-curl_opts=(-fsSL)
-
-# NOTE: You might want to remove this if spark is not hosted on GitHub releases.
-if [ -n "${GITHUB_API_TOKEN:-}" ]; then
-	curl_opts=("${curl_opts[@]}" -H "Authorization: token $GITHUB_API_TOKEN")
-fi
 
 sort_versions() {
 	sed 'h; s/[+-]/./g; s/.p\([[:digit:]]\)/.z\1/; s/$/.z/; G; s/\n/ /' |
@@ -35,15 +26,16 @@ list_all_versions() {
 }
 
 download_release() {
-	local version filename url
+	local version filename base_version url
 	version="$1"
 	filename="$2"
 
-	# TODO: Adapt the release URL convention for spark
-	url="$GH_REPO/archive/v${version}.tar.gz"
+  base_version=$(echo "$version" | cut -d'-' -f1)
+
+	url="https://archive.apache.org/dist/spark/spark-${base_version}/spark-${version}.tgz"
 
 	echo "* Downloading $TOOL_NAME release $version..."
-	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
+	curl -fsSL -o "$filename" -C - "$url" || fail "Could not download $url"
 }
 
 install_version() {
