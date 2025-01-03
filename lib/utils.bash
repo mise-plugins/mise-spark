@@ -8,7 +8,7 @@ TOOL_NAME="spark"
 TOOL_TEST="spark --help"
 
 fail() {
-	echo -e "asdf-$TOOL_NAME: $*"
+	echo -e "mise-$TOOL_NAME: $*"
 	exit 1
 }
 
@@ -54,7 +54,7 @@ install_version() {
 	local install_path="${3%/bin}/bin"
 
 	if [ "$install_type" != "version" ]; then
-		fail "asdf-$TOOL_NAME supports release installs only"
+		fail "mise-$TOOL_NAME supports release installs only"
 	fi
 
 	(
