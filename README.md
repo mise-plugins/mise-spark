@@ -41,7 +41,7 @@ asdf install spark latest
 asdf global spark latest
 
 # Now spark commands are available
-spark --help
+spark-shell --help
 ```
 
 Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to
