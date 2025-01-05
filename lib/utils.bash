@@ -5,6 +5,9 @@ set -euo pipefail
 TOOL_NAME="spark"
 TOOL_TEST="spark-shell --version"
 
+CURRENT_DOWNLOADS_URL="https://downloads.apache.org/spark/"
+ARCHIVE_URL="https://archive.apache.org/dist/spark/"
+
 fail() {
 	echo -e "mise-$TOOL_NAME: $*"
 	exit 1
@@ -15,11 +18,12 @@ sort_versions() {
 		LC_ALL=C sort -t. -k 1,1 -k 2,2n -k 3,3n -k 4,4n -k 5,5n | awk '{print $2}'
 }
 
-list_all_versions() {
-	curl -s "https://archive.apache.org/dist/spark/" |
+list_versions() {
+	local url="$1"
+	curl -s "$url" |
 		grep -o "spark-.*" |
 		cut -d '/' -f1 |
-		xargs -I{} curl -s "https://archive.apache.org/dist/spark/{}/" |
+		xargs -I{} curl -s "${url}{}/" |
 		grep -o ">spark-.*\.tgz</a" |
 		sed 's/>spark-//' |
 		sed 's/\.tgz<\/a//'
@@ -32,7 +36,7 @@ download_release() {
 
   base_version=$(echo "$version" | cut -d'-' -f1)
 
-	url="https://archive.apache.org/dist/spark/spark-${base_version}/spark-${version}.tgz"
+	url="${ARCHIVE_URL}spark-${base_version}/spark-${version}.tgz"
 
 	echo "* Downloading $TOOL_NAME release $version..."
 	curl -fsSL -o "$filename" -C - "$url" || fail "Could not download $url"
