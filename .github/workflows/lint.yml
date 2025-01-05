@@ -10,9 +10,9 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: asdf-vm/actions/install@v2
-      - run: scripts/lint.bash
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v2
+      - run: mise run lint
 
   actionlint:
     runs-on: ubuntu-latest

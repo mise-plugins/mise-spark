@@ -5,8 +5,8 @@ set -euo pipefail
 TOOL_NAME="spark"
 TOOL_TEST="spark-shell --version"
 
-CURRENT_DOWNLOADS_URL="https://downloads.apache.org/spark/"
-ARCHIVE_URL="https://archive.apache.org/dist/spark/"
+export CURRENT_DOWNLOADS_URL="https://downloads.apache.org/spark/"
+export ARCHIVE_URL="https://archive.apache.org/dist/spark/"
 
 fail() {
 	echo -e "mise-$TOOL_NAME: $*"
@@ -34,7 +34,7 @@ download_release() {
 	version="$1"
 	filename="$2"
 
-  base_version=$(echo "$version" | cut -d'-' -f1)
+	base_version=$(echo "$version" | cut -d'-' -f1)
 
 	url="${ARCHIVE_URL}spark-${base_version}/spark-${version}.tgz"
 

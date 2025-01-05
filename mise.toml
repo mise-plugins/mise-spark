@@ -1,0 +1,8 @@
+[tools]
+shellcheck = "0.10.0"
+shfmt = "3.10.0"
+
+
+[tasks]
+lint = "shellcheck --shell=bash bin/* lib/*"
+format = "shfmt --language-dialect bash --write ./**/*"
