@@ -7,16 +7,23 @@ on:
   pull_request:
 
 jobs:
-  plugin_test:
-    name: asdf plugin test
+  test:
     strategy:
       matrix:
         os:
           - ubuntu-latest
           - macos-latest
+
     runs-on: ${{ matrix.os }}
+
     steps:
-      - name: asdf_plugin_test
-        uses: asdf-vm/actions/plugin-test@v2
-        with:
-          command: spark --help
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Mise
+        uses: jdx/mise-action@v2
+
+      - name: Link the plugin
+        run: mise plugins link --force "${PWD}"
+      - name: Smoke test
+        run: mise --verbose x spark@latest -- spark-shell --version
