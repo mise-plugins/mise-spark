@@ -9,6 +9,6 @@ plugin_dir=$(dirname "$(dirname "$current_script_path")")
 . "${plugin_dir}/lib/utils.bash"
 
 list_versions "$CURRENT_DOWNLOADS_URL" |
-	grep --invert-match "preview" |
+	grep -v "preview" |
 	sort_versions |
 	tail -n 1
