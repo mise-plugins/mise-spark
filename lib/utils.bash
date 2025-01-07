@@ -45,7 +45,7 @@ download_release() {
 install_version() {
 	local install_type="$1"
 	local version="$2"
-	local install_path="${3%/bin}/bin"
+	local install_path="$3"
 
 	if [ "$install_type" != "version" ]; then
 		fail "mise-$TOOL_NAME supports release installs only"
@@ -58,7 +58,7 @@ install_version() {
 		# TODO: Assert spark-shell executable exists.
 		local tool_cmd
 		tool_cmd="$(printf %s "$TOOL_TEST" | cut -d' ' -f1)"
-		test -x "$install_path/$tool_cmd" || fail "Expected $install_path/$tool_cmd to be executable."
+		test -x "$install_path/bin/$tool_cmd" || fail "Expected $install_path/bin/$tool_cmd to be executable."
 
 		printf "%s %s installation was successful!\n" "$TOOL_NAME" "$version"
 	) || (
