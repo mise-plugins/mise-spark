@@ -7,3 +7,6 @@ shfmt = "3.10.0"
 lint = "shellcheck --shell=bash bin/* lib/*"
 format-check= "shfmt --language-dialect bash --diff ./**/*"
 format = "shfmt --language-dialect bash --write ./**/*"
+
+[settings]
+fetch_remote_versions_timeout = "60s"
