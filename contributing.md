@@ -3,10 +3,10 @@
 Testing Locally:
 
 ```shell
-asdf plugin test <plugin-name> <plugin-url> [--asdf-tool-version <version>] [--asdf-plugin-gitref <git-ref>] [test-command*]
+# link the plugin
+mise plugins link --force "${PWD}"
 
-# TODO: adapt this
-asdf plugin test spark https://github.com/benberryallwood/mise-spark.git "spark-shell --help"
+mise --verbose x spark@latest -- spark-shell --version
 ```
 
 Tests are automatically run in GitHub Actions on push and PR.

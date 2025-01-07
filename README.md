@@ -2,7 +2,7 @@
 
 # mise-spark [![Build](https://github.com/benberryallwood/mise-spark/actions/workflows/build.yml/badge.svg)](https://github.com/benberryallwood/mise-spark/actions/workflows/build.yml) [![Lint](https://github.com/benberryallwood/mise-spark/actions/workflows/lint.yml/badge.svg)](https://github.com/benberryallwood/mise-spark/actions/workflows/lint.yml)
 
-[Apache Spark](https://spark.apache.org/documentation.html) plugin for the [asdf version manager](https://asdf-vm.com).
+[Apache Spark](https://spark.apache.org/documentation.html) plugin for the [mise version manager](https://mise.jdx.dev).
 
 </div>
 
@@ -25,27 +25,26 @@
 Plugin:
 
 ```shell
-asdf plugin add spark https://github.com/benberryallwood/mise-spark.git
+mise plugins install spark https://github.com/benberryallwood/mise-spark.git
 ```
 
 spark:
 
 ```shell
 # Show all installable versions
-asdf list-all spark
+mise ls-remote spark
 
 # Install specific version
-asdf install spark latest
+mise install spark@latest
 
-# Set a version globally (on your ~/.tool-versions file)
-asdf global spark latest
+# Set a version globally (on your ~/.config/mise/config.toml file)
+mise use --global spark@latest
 
 # Now spark commands are available
 spark-shell --help
 ```
 
-Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to
-install & manage versions.
+Check [mise](https://mise.jdx.dev) docs for more instructions on how to install & manage versions.
 
 ## Contributing
 
