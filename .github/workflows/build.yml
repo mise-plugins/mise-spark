@@ -29,4 +29,12 @@ jobs:
       - name: Link the plugin
         run: mise plugins link --force "${PWD}"
       - name: Smoke test
-        run: mise --verbose x spark@latest -- spark-shell --version
+        run: |
+          version=$(
+            mise ls-remote spark |
+            grep "$(mise latest spark)" |
+            grep "hadoop" |
+            sort |
+            head -1
+          )
+          mise --verbose x spark@"$version" -- spark-shell --version
