@@ -6,6 +6,9 @@ on:
       - main
   pull_request:
 
+env:
+  MISE_GITHUB_TOKEN: ${{ secrets.MISE_GITHUB_TOKEN }}
+
 jobs:
   test:
     strategy:
