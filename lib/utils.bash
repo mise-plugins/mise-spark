@@ -9,7 +9,7 @@ export CURRENT_DOWNLOADS_URL="https://downloads.apache.org/spark/"
 export ARCHIVE_URL="https://archive.apache.org/dist/spark/"
 
 fail() {
-	echo -e "mise-$TOOL_NAME: $*"
+	printf "mise-%s: %s\n" "$TOOL_NAME" "$*"
 	exit 1
 }
 
@@ -34,11 +34,11 @@ download_release() {
 	version="$1"
 	filename="$2"
 
-	base_version=$(echo "$version" | cut -d'-' -f1)
+	base_version=$(printf %s "$version" | cut -d'-' -f1)
 
 	url="${ARCHIVE_URL}spark-${base_version}/spark-${version}.tgz"
 
-	echo "* Downloading $TOOL_NAME release $version..."
+	printf "* Downloading %s release %s...\n" "$TOOL_NAME" "$version"
 	curl -fsSL -o "$filename" -C - "$url" || fail "Could not download $url"
 }
 
@@ -57,10 +57,10 @@ install_version() {
 
 		# TODO: Assert spark-shell executable exists.
 		local tool_cmd
-		tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
+		tool_cmd="$(printf %s "$TOOL_TEST" | cut -d' ' -f1)"
 		test -x "$install_path/$tool_cmd" || fail "Expected $install_path/$tool_cmd to be executable."
 
-		echo "$TOOL_NAME $version installation was successful!"
+		printf "%s %s installation was successful!\n" "$TOOL_NAME" "$version"
 	) || (
 		rm -rf "$install_path"
 		fail "An error occurred while installing $TOOL_NAME $version."
