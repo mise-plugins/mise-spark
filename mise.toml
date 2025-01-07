@@ -5,4 +5,5 @@ shfmt = "3.10.0"
 
 [tasks]
 lint = "shellcheck --shell=bash bin/* lib/*"
+format-check= "shfmt --language-dialect bash --diff ./**/*"
 format = "shfmt --language-dialect bash --write ./**/*"
