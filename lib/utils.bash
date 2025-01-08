@@ -34,7 +34,7 @@ download_release() {
 	version="$1"
 	filename="$2"
 
-	base_version=$(printf %s "$version" | cut -d'-' -f1)
+	base_version=$(printf %s "$version" | awk -F'-bin' '{print $1}')
 
 	url="${ARCHIVE_URL}spark-${base_version}/spark-${version}.tgz"
 
