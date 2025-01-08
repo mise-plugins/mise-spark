@@ -10,5 +10,4 @@ plugin_dir=$(dirname "$(dirname "$current_script_path")")
 
 list_versions "$CURRENT_DOWNLOADS_URL" |
 	grep -v "preview" |
-	sort_versions |
 	tail -n 1
