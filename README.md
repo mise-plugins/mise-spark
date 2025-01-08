@@ -76,6 +76,8 @@ Contributions of any kind welcome! See the [contributing guide](contributing.md)
 
 [Thanks goes to these contributors](https://github.com/benberryallwood/mise-spark/graphs/contributors)!
 
+Thanks also to the [asdf-spark](https://github.com/joshuaballoch/asdf-spark) author and contributors.
+
 ## License
 
 See [LICENSE](LICENSE) © [Ben Berry-Allwood](https://github.com/benberryallwood/)
