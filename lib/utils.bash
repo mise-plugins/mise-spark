@@ -5,6 +5,8 @@ set -euo pipefail
 TOOL_NAME="spark"
 TOOL_TEST="spark-shell --version"
 
+CONCURRENCY=32
+
 export CURRENT_DOWNLOADS_URL="https://downloads.apache.org/spark/"
 export ARCHIVE_URL="https://archive.apache.org/dist/spark/"
 
@@ -18,7 +20,7 @@ list_versions() {
 	curl -s "$url" |
 		grep -o "spark-.*" |
 		cut -d '/' -f1 |
-		xargs -I{} curl -s "${url}{}/" |
+		xargs -P$CONCURRENCY -I{} curl -s "${url}{}/" |
 		grep -o ">spark-.*\.tgz</a" |
 		sed 's/>spark-//' |
 		sed 's/\.tgz<\/a//'
